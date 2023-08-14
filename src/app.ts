@@ -1,8 +1,8 @@
 class Department {
   //   private name: string;
-  //   private id: string;
+  //   private readonly id: string;
   private employees: string[] = [];
-  constructor(private id: string, private name: string) {
+  constructor(private readonly id: string, private name: string) {
     // this.name = n;
     // this.id = id;
   }
