@@ -4,12 +4,20 @@ add = (n1, n2) => {
     return n1 + n2;
 };
 class Person {
-    constructor(name, age) {
+    constructor(name, age, outputName) {
         this.name = name;
         this.age = age;
+        if (outputName) {
+            this.outputName = outputName;
+        }
     }
     greet(phrase) {
-        console.log(phrase + " " + this.name);
+        if (this.outputName) {
+            console.log(phrase + " " + this.outputName);
+        }
+        else {
+            console.log(phrase + " " + this.name);
+        }
     }
 }
 let user1;

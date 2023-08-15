@@ -10,15 +10,26 @@ add = (n1: number, n2: number) => {
 
 interface Named {
   readonly name: string;
+  outputName?: string; //Now this one is optional
 }
 interface Greetable extends Named {
+  //We can combine more  interfaces
   greet(phrase: string): void;
 }
 
 class Person implements Greetable {
-  constructor(public name: string, public age: number) {}
+  outputName?: string;
+  constructor(public name: string, public age: number, outputName?: string) {
+    if (outputName) {
+      this.outputName = outputName;
+    }
+  }
   greet(phrase: string): void {
-    console.log(phrase + " " + this.name);
+    if (this.outputName) {
+      console.log(phrase + " " + this.outputName);
+    } else {
+      console.log(phrase + " " + this.name);
+    }
   }
 }
 
