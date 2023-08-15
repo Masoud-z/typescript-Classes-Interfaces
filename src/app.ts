@@ -1,9 +1,9 @@
-class Department {
+abstract class Department {
   static fiscalYear = 2022;
   //   private name: string;
   //   private readonly id: string;
   protected employees: string[] = [];
-  constructor(private readonly id: string, private name: string) {
+  constructor(protected readonly id: string, private name: string) {
     // this.name = n;
     // this.id = id;
   }
@@ -12,9 +12,7 @@ class Department {
     return { name: name };
   }
 
-  describe(this: Department) {
-    console.log(`Department: ${this.id} ${this.name}`);
-  }
+  abstract describe(this: Department): void;
 
   addEmployee(employee: string) {
     this.employees.push(employee);
@@ -26,11 +24,30 @@ class Department {
   }
 }
 
+console.log(Department.createEmployee("New Employee!"));
+console.log(Department.fiscalYear);
+
+//-----------------++==++-----------------
 class ITDepartment extends Department {
   constructor(id: string, public admins: string[]) {
     super(id, "IT");
   }
+  describe(): void {
+    console.log("IT department - ID: " + this.id);
+  }
 }
+
+const it = new ITDepartment("d1", ["Max"]);
+console.log(it);
+it.describe();
+
+it.addEmployee("Masoud");
+it.addEmployee("Alex");
+it.addEmployee("Sarah");
+
+it.printEmployeeInformation();
+
+//-----------------++==++-----------------
 
 class AccountingDepartment extends Department {
   private lastReport: string;
@@ -50,6 +67,10 @@ class AccountingDepartment extends Department {
     this.lastReport = reports[0];
   }
 
+  describe(): void {
+    console.log("Accounting department - ID: " + this.id);
+  }
+
   addEmployee(employee: string): void {
     if (employee === "Max") {
       return;
@@ -67,16 +88,6 @@ class AccountingDepartment extends Department {
   }
 }
 
-const it = new ITDepartment("d1", ["Max"]);
-console.log(it);
-it.describe();
-
-it.addEmployee("Masoud");
-it.addEmployee("Alex");
-it.addEmployee("Sarah");
-
-it.printEmployeeInformation();
-
 const accounting = new AccountingDepartment("d2", []);
 
 accounting.addReport("Something went wrong!");
@@ -84,9 +95,7 @@ accounting.mostRecentReport = "Year end report";
 console.log(accounting.mostRecentReport);
 
 accounting.printReports();
+accounting.describe();
 
 // const accountingCopy = { name: "DUMMY", describe: accounting.describe };
 // accountingCopy.describe();
-
-console.log(Department.createEmployee("New Employee!"));
-console.log(Department.fiscalYear);

@@ -8,9 +8,6 @@ class Department {
     static createEmployee(name) {
         return { name: name };
     }
-    describe() {
-        console.log(`Department: ${this.id} ${this.name}`);
-    }
     addEmployee(employee) {
         this.employees.push(employee);
     }
@@ -20,12 +17,24 @@ class Department {
     }
 }
 Department.fiscalYear = 2022;
+console.log(Department.createEmployee("New Employee!"));
+console.log(Department.fiscalYear);
 class ITDepartment extends Department {
     constructor(id, admins) {
         super(id, "IT");
         this.admins = admins;
     }
+    describe() {
+        console.log("IT department - ID: " + this.id);
+    }
 }
+const it = new ITDepartment("d1", ["Max"]);
+console.log(it);
+it.describe();
+it.addEmployee("Masoud");
+it.addEmployee("Alex");
+it.addEmployee("Sarah");
+it.printEmployeeInformation();
 class AccountingDepartment extends Department {
     get mostRecentReport() {
         if (this.lastReport)
@@ -42,6 +51,9 @@ class AccountingDepartment extends Department {
         this.reports = reports;
         this.lastReport = reports[0];
     }
+    describe() {
+        console.log("Accounting department - ID: " + this.id);
+    }
     addEmployee(employee) {
         if (employee === "Max") {
             return;
@@ -56,18 +68,10 @@ class AccountingDepartment extends Department {
         console.log(this.reports);
     }
 }
-const it = new ITDepartment("d1", ["Max"]);
-console.log(it);
-it.describe();
-it.addEmployee("Masoud");
-it.addEmployee("Alex");
-it.addEmployee("Sarah");
-it.printEmployeeInformation();
 const accounting = new AccountingDepartment("d2", []);
 accounting.addReport("Something went wrong!");
 accounting.mostRecentReport = "Year end report";
 console.log(accounting.mostRecentReport);
 accounting.printReports();
-console.log(Department.createEmployee("New Employee!"));
-console.log(Department.fiscalYear);
+accounting.describe();
 //# sourceMappingURL=app.js.map
