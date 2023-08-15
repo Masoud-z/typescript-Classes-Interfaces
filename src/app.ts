@@ -1,10 +1,15 @@
 class Department {
+  static fiscalYear = 2022;
   //   private name: string;
   //   private readonly id: string;
   protected employees: string[] = [];
   constructor(private readonly id: string, private name: string) {
     // this.name = n;
     // this.id = id;
+  }
+
+  static createEmployee(name: string) {
+    return { name: name };
   }
 
   describe(this: Department) {
@@ -82,3 +87,6 @@ accounting.printReports();
 
 // const accountingCopy = { name: "DUMMY", describe: accounting.describe };
 // accountingCopy.describe();
+
+console.log(Department.createEmployee("New Employee!"));
+console.log(Department.fiscalYear);

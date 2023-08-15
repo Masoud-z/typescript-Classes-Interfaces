@@ -5,6 +5,9 @@ class Department {
         this.name = name;
         this.employees = [];
     }
+    static createEmployee(name) {
+        return { name: name };
+    }
     describe() {
         console.log(`Department: ${this.id} ${this.name}`);
     }
@@ -16,6 +19,7 @@ class Department {
         console.log(this.employees);
     }
 }
+Department.fiscalYear = 2022;
 class ITDepartment extends Department {
     constructor(id, admins) {
         super(id, "IT");
@@ -64,4 +68,6 @@ accounting.addReport("Something went wrong!");
 accounting.mostRecentReport = "Year end report";
 console.log(accounting.mostRecentReport);
 accounting.printReports();
+console.log(Department.createEmployee("New Employee!"));
+console.log(Department.fiscalYear);
 //# sourceMappingURL=app.js.map
